@@ -1,29 +1,3 @@
-// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
-
-// public class PlayerMovement : MonoBehaviour
-// {
-//     // Start is called before the first frame update
-//     void Start(){
-        
-//     }
-
-//     // Update is called once per frame
-//     void Update(){
-//         if(input.GetKeyDown(KeyCode.Space)){jumpKeyPressed = true;} //pentru a evita double/triple etc. jumps
-//     }
-
-//     void FixedUpdate(){
-
-//         if(jumpKeyPressed){
-//             GetComponent<RigidBody>().AddForce(Vector3.up*3, ForceMode.VelocityChange);
-//             jumpKeyPressed = false;
-//         }
-//     }
-
-// }
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
