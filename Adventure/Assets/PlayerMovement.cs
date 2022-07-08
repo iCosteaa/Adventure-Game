@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] float movementSpeed = 6f;
+    [SerializeField] float movementSpeed = 1f;
     [SerializeField] float jumpForce = 5f;
 
     [SerializeField] Transform groundCheck;
