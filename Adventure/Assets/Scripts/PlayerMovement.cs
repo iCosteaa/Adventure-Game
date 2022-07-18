@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 	    
-        if (Input.GetKey (KeyCode.LeftShift) && Input.GetKey ("w")){
+        if (Input.GetKey (KeyCode.LeftShift) && Input.GetKey ("w") && IsGrounded()){
             rbg.velocity = new Vector3(horizontalInput * movementSpeed, rbg.velocity.y, verticalInput * movementSpeed * speedAcceleration);
         }
 
