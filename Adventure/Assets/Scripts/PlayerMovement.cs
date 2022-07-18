@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rbg;
     [SerializeField] float movementSpeed = 5f;
     [SerializeField] float jumpAcceleration = 5f;
-    [SerializeField] float movementAcceleration = 1f;
+    [SerializeField] float speedAcceleration = 2f;
 
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
@@ -28,6 +28,11 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+	    
+        if (Input.GetKey (KeyCode.LeftShift) && Input.GetKey ("w")){
+            rbg.velocity = new Vector3(horizontalInput * movementSpeed, rbg.velocity.y, verticalInput * movementSpeed * speedAcceleration);
+        }
+
     }
 
     void Jump()
@@ -37,8 +42,6 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsGrounded()
     {
-        return Physics.CheckSphere(groundCheck.position, .1f, ground);
+        return Physics.CheckSphere(groundCheck.position, 0.1f, ground); //verificam daca distanta dintre doua obiecte este de macar 0.1 unitati
     }
 }
-
-// 		to do: if (Input.GetKey (KeyCode.LeftShift) && Input.GetKey ("w"))
