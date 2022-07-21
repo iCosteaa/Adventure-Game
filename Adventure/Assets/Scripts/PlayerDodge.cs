@@ -15,7 +15,7 @@ public class PlayerDodge : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    
+        
     void Update()
     {
        
@@ -23,11 +23,12 @@ public class PlayerDodge : MonoBehaviour
         if (Input.GetButtonUp("Dodge"))
         {
             float dodge = Input.GetAxis("Dodge");
+            
 
-             rb.velocity = new Vector3(dodge, 0, 0);
+            rb.velocity = new Vector3(dodge, 0, 0);
 
             
-            rb.MovePosition(transform.position + rb.velocity * /*Time.deltaTime **/ dodgeSpeed);
+            rb.MovePosition(transform.position + rb.velocity * /* Time.deltaTime * */ dodgeSpeed);
             
 
         }
