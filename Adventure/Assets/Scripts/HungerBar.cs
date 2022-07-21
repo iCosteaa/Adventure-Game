@@ -30,7 +30,7 @@ public class HungerBar : MonoBehaviour
             {
                 Hunger -= 3 * Time.deltaTime;   
             }
-            if(Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.LeftShift)){
+            if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E) || (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))){
                 Hunger -= 5 * Time.deltaTime;   
             }
         }
