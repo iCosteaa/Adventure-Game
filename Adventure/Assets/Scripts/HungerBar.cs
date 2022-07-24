@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 public class HungerBar : MonoBehaviour
 {
-
     public Slider HungerSlider;
     public static float Hunger;
-    public static float maxHunger = 1000f;
+    public static float maxHunger;
 
     void Start()
-    {
+    {   
         HungerSlider.minValue = 0;
         HungerSlider.maxValue = maxHunger;
         Hunger = maxHunger;
