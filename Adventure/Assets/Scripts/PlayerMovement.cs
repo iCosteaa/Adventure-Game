@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rbg;
+    Rigidbody rb;
     [SerializeField] float movementSpeed = 5f;
     [SerializeField] float jumpAcceleration = 5f;
     [SerializeField] float speedAcceleration = 2f;
@@ -13,33 +13,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
 
+    [SerializeField] Transform cam;
+    Vector2 input;
+
     void Start()
     {
-        rbg = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        // float horizontalInput = Input.GetAxis("Horizontal");
-        // float verticalInput = Input.GetAxis("Vertical");
-
-        // rbg.velocity = new Vector3(horizontalInput * movementSpeed, rbg.velocity.y, verticalInput * movementSpeed);
-
-        // if (Input.GetButtonDown("Jump") && IsGrounded())
-        // {
-        //     Jump();
-        // }
-	    
-        // if (Input.GetKey (KeyCode.LeftShift) && Input.GetKey ("w") && IsGrounded()){
-        //     rbg.velocity = new Vector3(horizontalInput * movementSpeed, rbg.velocity.y, verticalInput * movementSpeed * speedAcceleration);
-        // }
-        MovePlayer();
-        MouseRotate();
+        PlayerMovement2();
     }
 
     void Jump()
     {
-        rbg.velocity = new Vector3(rbg.velocity.x, jumpAcceleration, rbg.velocity.z);
+        rb.velocity = new Vector3(rb.velocity.x, jumpAcceleration, rb.velocity.z);
     }
 
     bool IsGrounded()
@@ -47,25 +36,32 @@ public class PlayerMovement : MonoBehaviour
         return Physics.CheckSphere(groundCheck.position, 0.1f, ground); //verificam daca distanta dintre doua obiecte este de macar 0.1 unitati
     }
 
-    void MouseRotate(){
+    void PlayerMovement2(){
         float rotateHorizontal = Input.GetAxis ("Mouse X");
         float rotateVertical = Input.GetAxis ("Mouse Y");        
-        rbg.angularVelocity = new Vector3(rotateVertical * sensitivity, rotateHorizontal * sensitivity,0f);
+        rb.angularVelocity = new Vector3(rotateVertical * sensitivity, rotateHorizontal * sensitivity,0f);
 
+        input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        input = Vector2.ClampMagnitude(input, 1);
+
+        Vector3 camF = cam.forward;
+        Vector3 camR = cam.right;
+
+        camF.y = 0;
+        camR.y = 0;
+        camF = camF.normalized;
+        camR = camR.normalized;
+
+        rb.transform.position += (camF * input.y * movementSpeed + camR * input.x * movementSpeed) * Time.deltaTime * 5;
+
+        if (Input.GetButtonDown("Jump") && IsGrounded())
+        {
+            Jump();
+        }
+	    
+        if (Input.GetKey (KeyCode.LeftShift) && Input.GetKey ("w") && IsGrounded()){
+            rb.transform.position += (camF * input.y + camR * input.x * speedAcceleration) * Time.deltaTime * 5;
+        }
     }
 
-    void MovePlayer(){
-        if(Input.GetKey(KeyCode.W)) {
-            rbg.position += Vector3.forward * Time.deltaTime * movementSpeed;
-         }
-         else if(Input.GetKey(KeyCode.S)) {
-             rbg.position += Vector3.back * Time.deltaTime * movementSpeed;
-         }
-         else if(Input.GetKey(KeyCode.A)) {
-             rbg.position += Vector3.left * Time.deltaTime * movementSpeed;
-         }
-         else if(Input.GetKey(KeyCode.D)) {
-             rbg.position += Vector3.right * Time.deltaTime * movementSpeed;
-         }
-    }
 }
