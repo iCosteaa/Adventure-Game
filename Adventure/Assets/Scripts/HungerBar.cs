@@ -7,7 +7,7 @@ public class HungerBar : MonoBehaviour
 {
     public Slider HungerSlider;
     public static float Hunger;
-    public static float maxHunger;
+    public static float maxHunger = 100f;
 
     void Start()
     {   

@@ -38,8 +38,9 @@ public class PlayerMovement : MonoBehaviour
 
     void PlayerMovement2(){
         float rotateHorizontal = Input.GetAxis ("Mouse X");
-        float rotateVertical = Input.GetAxis ("Mouse Y");        
-        rb.angularVelocity = new Vector3(rotateVertical * sensitivity, rotateHorizontal * sensitivity,0f);
+        float rotateVertical = Input.GetAxis ("Mouse Y");  
+
+        rb.angularVelocity = new Vector3(rotateVertical * sensitivity, rotateHorizontal * sensitivity, 0f);
 
         input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         input = Vector2.ClampMagnitude(input, 1);
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         }
 	    
         if (Input.GetKey (KeyCode.LeftShift) && Input.GetKey ("w") && IsGrounded()){
-            rb.transform.position += (camF * input.y + camR * input.x * speedAcceleration) * Time.deltaTime * 5;
+            rb.transform.position += ((camF * input.y + camR * input.x) * speedAcceleration) * Time.deltaTime * 5;
         }
     }
 
