@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpAcceleration = 5f;
     [SerializeField] float speedAcceleration = 2f;
     [SerializeField] float sensitivity = 2f;
+    //[SerializeField] float dodgeSpeed;
 
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask ground;
@@ -54,6 +55,24 @@ public class PlayerMovement : MonoBehaviour
         camR = camR.normalized;
 
         rb.transform.position += (camF * input.y * movementSpeed + camR * input.x * movementSpeed) * Time.deltaTime * 5;
+
+
+        /*   //Dodge attempt
+
+        if (Input.GetButtonUp("Dodge"))
+        {
+            float dodge = Input.GetAxis("Dodge");
+
+
+            rb.velocity = new Vector3(dodge, 0, 0);
+
+            
+            rb.MovePosition(transform.position + (rb.velocity * dodgeSpeed + camR * input.x * dodgeSpeed));
+            
+        }*/
+
+
+        /////////
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
